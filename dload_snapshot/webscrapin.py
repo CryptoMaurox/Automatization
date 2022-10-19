@@ -1,28 +1,24 @@
 from shlex import shlex
-import requests
-from bs4 import BeautifulSoup as b
+import requests #Hacer peticiones a las páginas
+from bs4 import BeautifulSoup as b #Poder manipular y extraer la información
 import unidecode
 import shlex, subprocess
 
 url = 'https://polkachu.com/tendermint_snapshots/teritori/'
 dload_url='https://snapshots.polkachu.com/snapshots/teritori/'
 
-html=requests.get(url)
-content=html.content
-soup = b(content, "lxml")
+html=requests.get(url) # get info HTML web page
+content=html.content # save the content 
+soup = b(content, "lxml") # convert to lxml
 
-title = soup.find("a",{"class":"link-brand"}) #busca solo el apartado de link de descarga
+title = soup.find("a",{"class":"link-brand"}) # Serch only download link
 
-link = unidecode.unidecode(title.string)
+snap_name = unidecode.unidecode(title.string) # Get only snapshot name
 
-print(link)
-dload_comm = ('wget -O '+''+link+' '+ dload_url + link + " --inet4-only")
-dload_comm_split=shlex.split(dload_comm)
+dload_comm = 'wget -O '+' '+'$HOME/Downloads/'+snap_name+ ' '+ dload_url + snap_name + " --inet4-only"
+print(dload_comm) #show the download snapshot command to execute
+subprocess.call(dload_comm, shell=True) #execute commnand ##Not recomended use shell=true change this in other versions
 
-print(dload_comm_split)
-subprocess.call(dload_comm_split)
-unzip_comm = 'lz4 -c -d /home/mauro/aprendizaje/python/teritori_226903.tar.lz4 | tar -x -C /home/mauro/pruebas/automatization'
-#unzip_comm_split=shlex.split(unzip_comm)
-
-print(unzip_comm)
-subprocess.call(unzip_comm, shell=True)
+unzip_comm = 'lz4 -c -d $HOME/Downloads/'+ snap_name+ ' | tar -x -C $HOME/Downloads'
+print(unzip_comm) #Show the unzip command to excute
+subprocess.call(unzip_comm, shell=True) #Execute command ##Not recomended use shell=true change this in other versions 
