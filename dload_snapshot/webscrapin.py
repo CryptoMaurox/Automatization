@@ -1,24 +1,39 @@
-from shlex import shlex
+from multiprocessing.connection import deliver_challenge
 import requests #Hacer peticiones a las páginas
 from bs4 import BeautifulSoup as b #Poder manipular y extraer la información
 import unidecode
-import shlex, subprocess
+import subprocess
+from snapshots import *
+from dirchains import *
 
-url = 'https://polkachu.com/tendermint_snapshots/teritori/'
-dload_url='https://snapshots.polkachu.com/snapshots/teritori/'
 
-html=requests.get(url) # get info HTML web page
-content=html.content # save the content 
-soup = b(content, "lxml") # convert to lxml
+array_url=[url_tori, url_meme]
+array_dload=[dload_tori, dload_meme]
+array_chaindir=[chaindir_tori, chaindir_meme]
+cantidad = len(array_dload)
+print(cantidad)
+chain = 2
 
-title = soup.find("a",{"class":"link-brand"}) # Serch only download link
+while chain <= cantidad:
+    
+    html=requests.get(array_url[chain]) # get info HTML web page
+    content=html.content # save the content 
+    soup = b(content, "lxml") # convert to lxml
 
-snap_name = unidecode.unidecode(title.string) # Get only snapshot name
+    title = soup.find("a",{"class":"link-brand"}) # Serch only download link
 
-dload_comm = 'wget -O '+' '+'$HOME/Downloads/'+snap_name+ ' '+ dload_url + snap_name + " --inet4-only"
-print(dload_comm) #show the download snapshot command to execute
-subprocess.call(dload_comm, shell=True) #execute commnand ##Not recomended use shell=true change this in other versions
+    snap_name = unidecode.unidecode(title.string) # Get only snapshot name
 
-unzip_comm = 'lz4 -c -d $HOME/Downloads/'+ snap_name+ ' | tar -x -C $HOME/Downloads'
-print(unzip_comm) #Show the unzip command to excute
-subprocess.call(unzip_comm, shell=True) #Execute command ##Not recomended use shell=true change this in other versions 
+    dload_comm = 'wget -O '+' '+'$HOME/Downloads/'+snap_name+ ' '+ array_dload[chain] + snap_name + " --inet4-only"
+    print(dload_comm) #show the download snapshot command to execute
+    subprocess.call(dload_comm, shell=True) #execute commnand ##Not recomended use shell=true change this in other versions
+
+
+    unzip_comm = 'lz4 -c -d $HOME/Downloads/'+ snap_name+ ' | tar -x -C ' + array_chaindir[chain]
+    print(unzip_comm) #Show the unzip command to excute
+    subprocess.call(unzip_comm, shell=True) #Execute command ##Not recomended use shell=true change this in other versions
+    chain += 1 
+
+    if cantidad == chain: 
+        print("\n successful!!")
+        break
