@@ -6,10 +6,12 @@ import subprocess
 from snapshots import *
 from dirchains import *
 
-
-array_url=[url_juno, url_evmos, url_stargtaze]
+##If you want add any chain add first the url_name and dload_name in snapshots.py in the same folder and add chain_dir in dirchain.py
+##add the new chain in this arrays in order please
+array_url=[url_juno, url_evmos, url_stargtaze] #url's array to download snapshots 
 array_dload=[dload_juno, dload_evmos, dload_stargaze]
 array_chaindir=[chaindir_juno, chaindir_evmos, chaindir_stargaze]
+
 cantidad = len(array_dload)
 chain = 0
 

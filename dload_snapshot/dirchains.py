@@ -1,5 +1,5 @@
 
 
-chaindir_juno = '/home/mauro/pruebas/automatization/.juno'
-chaindir_evmos = '/home/mauro/pruebas/automatization/.evmos'
-chaindir_stargaze = '/home/mauro/pruebas/automatization/.stargaze'
+chaindir_juno = '$HOME/snapshots/juno'
+chaindir_evmos = '$HOME/snapshots/evmos'
+chaindir_stargaze = '$HOME/snapshots/stargaze'
