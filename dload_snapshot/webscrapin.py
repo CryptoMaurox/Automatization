@@ -7,12 +7,11 @@ from snapshots import *
 from dirchains import *
 
 
-array_url=[url_tori, url_meme]
-array_dload=[dload_tori, dload_meme]
-array_chaindir=[chaindir_tori, chaindir_meme]
+array_url=[url_juno, url_evmos, url_stargtaze]
+array_dload=[dload_juno, dload_evmos, dload_stargaze]
+array_chaindir=[chaindir_juno, chaindir_evmos, chaindir_stargaze]
 cantidad = len(array_dload)
-print(cantidad)
-chain = 2
+chain = 0
 
 while chain <= cantidad:
     
@@ -32,6 +31,11 @@ while chain <= cantidad:
     unzip_comm = 'lz4 -c -d $HOME/Downloads/'+ snap_name+ ' | tar -x -C ' + array_chaindir[chain]
     print(unzip_comm) #Show the unzip command to excute
     subprocess.call(unzip_comm, shell=True) #Execute command ##Not recomended use shell=true change this in other versions
+
+    remove_comm = 'rm -r $HOME/Downloads/' + snap_name
+    print(remove_comm) #Show the unzip command to excute
+    subprocess.call(remove_comm, shell=True) 
+
     chain += 1 
 
     if cantidad == chain: 

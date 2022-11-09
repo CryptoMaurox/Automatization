@@ -1,13 +1,13 @@
 
 
 
-url_tori = 'https://polkachu.com/tendermint_snapshots/jackal'
-dload_tori='https://snapshots.polkachu.com/snapshots/jackal/'
+url_juno = 'https://polkachu.com/tendermint_snapshots/juno'
+dload_juno='https://snapshots.polkachu.com/snapshots/juno/'
 
-url_meme = 'https://polkachu.com/tendermint_snapshots/meme'
-dload_meme = 'https://snapshots.polkachu.com/snapshots/meme/'
+url_evmos = 'https://polkachu.com/tendermint_snapshots/evmos'
+dload_evmos = 'https://snapshots.polkachu.com/snapshots/evmos/'
 
-#Arrays to automatization downloads
-#if you add a chain add url_name and dload_name in the arrays too
+url_stargtaze = 'https://polkachu.com/tendermint_snapshots/stargaze'
+dload_stargaze = 'https://snapshots.polkachu.com/snapshots/stargaze/'
 
 
